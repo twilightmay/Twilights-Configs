@@ -881,7 +881,7 @@
   .burger-link-icon svg, .burger-link-icon img { width: 20px; height: 20px; }
 
   /* Per-platform icon colours */
-  .bic-guns    { background: linear-gradient(135deg,rgba(255,80,60,0.18),rgba(200,40,30,0.10)); border: 1px solid rgba(255,80,60,0.25); }
+  .bic-guns    { background: linear-gradient(135deg,rgba(124,111,220,0.18),rgba(91,78,180,0.10)); border: 1px solid rgba(124,111,220,0.35); }
   .bic-github  { background: linear-gradient(135deg,rgba(255,255,255,0.10),rgba(180,180,180,0.05)); border: 1px solid rgba(255,255,255,0.12); }
   .bic-discord { background: linear-gradient(135deg,rgba(88,101,242,0.22),rgba(60,72,210,0.12)); border: 1px solid rgba(88,101,242,0.30); }
   .bic-kofi   { background: linear-gradient(135deg,rgba(255,94,91,0.20),rgba(220,60,58,0.10)); border: 1px solid rgba(255,94,91,0.28); }
@@ -1344,23 +1344,39 @@ function renderMediaSlider(pack, idx) {
   var hasAny    = hasVideo || hasImages;
   var total     = images.length + (hasVideo ? 1 : 0);
 
+  // Colour map for FiveM config placeholders
+  var ftypeColors = {
+    legit: { bg: 'linear-gradient(135deg,#0a2e1a,#0d3d20)', border: 'rgba(52,211,153,0.25)', text: '#34d399', icon: '#34d399' },
+    semi:  { bg: 'linear-gradient(135deg,#2e2200,#3d2e00)', border: 'rgba(251,191,36,0.25)',  text: '#fbbf24', icon: '#fbbf24' },
+    rage:  { bg: 'linear-gradient(135deg,#2e0a0a,#3d1010)', border: 'rgba(248,113,113,0.25)', text: '#f87171', icon: '#f87171' },
+  };
+  var fc = pack.ftype ? ftypeColors[pack.ftype] : null;
+
   // Build slides
   var slidesHtml = '';
 
   // Image slides
   images.forEach(function(imgSrc, s) {
     if (imgSrc) {
-      // Real image
       slidesHtml += '<div class="slide">'
         + '<img src="' + imgSrc + '" alt="' + pack.name + ' screenshot ' + (s+1) + '" loading="lazy" onerror="this.parentElement.innerHTML=\'<div class=slide-placeholder><svg viewBox=\\\'0 0 24 24\\\' fill=\\\'none\\\' stroke=\\\'currentColor\\\' stroke-width=\\\'1.5\\\'><rect x=\\\'3\\\' y=\\\'3\\\' width=\\\'18\\\' height=\\\'18\\\' rx=\\\'2\\\'/></svg><span>Image not found</span></div>\'">'
         + '</div>';
     } else {
-      // Placeholder with helpful label
-      slidesHtml += '<div class="slide slide-ph">'
-        + '<div class="slide-placeholder">'
-        + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>'
-        + '<span>Screenshot ' + (s+1) + '</span>'
-        + '</div></div>';
+      if (fc) {
+        // Coloured FiveM placeholder with config name
+        slidesHtml += '<div class="slide slide-ph" style="background:' + fc.bg + ';border:1px solid ' + fc.border + ';">'
+          + '<div class="slide-placeholder">'
+          + '<svg viewBox="0 0 24 24" fill="none" stroke="' + fc.icon + '" stroke-width="1.5" opacity="0.6" width="32" height="32"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
+          + '<span style="color:' + fc.text + ';font-size:13px;font-weight:700;letter-spacing:.08em;">' + pack.name + ' Config</span>'
+          + '<span style="color:rgba(255,255,255,0.25);font-size:10px;letter-spacing:.1em;">Screenshot ' + (s+1) + '</span>'
+          + '</div></div>';
+      } else {
+        slidesHtml += '<div class="slide slide-ph">'
+          + '<div class="slide-placeholder">'
+          + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>'
+          + '<span>Screenshot ' + (s+1) + '</span>'
+          + '</div></div>';
+      }
     }
   });
 
@@ -1461,14 +1477,13 @@ function renderPackCard(pack, idx) {
   // Download button (FiveM only)
   var downloadBtn = '';
   if (currentGame === 'fivem' && pack.downloadUrl) {
-    var fname = pack.downloadUrl.split('/').pop() || (pack.name.toLowerCase().replace(/\s+/g,'-') + '.cfg');
-    downloadBtn = '<a class="pack-download" href="' + pack.downloadUrl + '" download title="Download config">'
+    var fname = pack.name.toLowerCase().replace(/\s+/g, '-') + '-config.json';
+    downloadBtn = '<button class="pack-download" type="button" onclick="downloadConfig(\'' + pack.downloadUrl + '\',\'' + fname + '\',this)">'
       + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
       + '<span class="dl-label">Download Config</span>'
       + '<span class="dl-filename">' + fname + '</span>'
-      + '</a>';
+      + '</button>';
   } else if (currentGame === 'fivem') {
-    // Placeholder download button — no file yet
     downloadBtn = '<button class="pack-download" onclick="noDownloadYet(this)" type="button">'
       + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
       + '<span class="dl-label">Download Config</span>'
@@ -1894,6 +1909,43 @@ function handleBurgerOverlayClick(e) {
   if (e.target === document.getElementById('burgerOverlay')) closeBurgerMenu();
 }
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeBurgerMenu(); closeDiscordModal(); closeShowcaseModal(); } });
+
+// ============================================================
+// DOWNLOAD CONFIG — fetch as blob to force save dialog
+// ============================================================
+function downloadConfig(url, filename, btn) {
+  var origHtml = btn.innerHTML;
+  // Show loading state
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;animation:spin 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg><span class="dl-label">Downloading…</span>';
+  // Add spin keyframe if not present
+  if (!document.getElementById('spin-kf')) {
+    var s = document.createElement('style');
+    s.id = 'spin-kf';
+    s.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+    document.head.appendChild(s);
+  }
+  fetch(url)
+    .then(function(r) {
+      if (!r.ok) throw new Error('Network error ' + r.status);
+      return r.blob();
+    })
+    .then(function(blob) {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() { URL.revokeObjectURL(a.href); document.body.removeChild(a); }, 1000);
+      // Success state
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg><span class="dl-label">Downloaded!</span>';
+      btn.classList.add('dl-success');
+      setTimeout(function() { btn.innerHTML = origHtml; btn.classList.remove('dl-success'); }, 2500);
+    })
+    .catch(function() {
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span class="dl-label">Failed — try again</span>';
+      setTimeout(function() { btn.innerHTML = origHtml; }, 2500);
+    });
+}
 
 // ============================================================
 // NO DOWNLOAD YET
