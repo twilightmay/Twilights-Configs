@@ -83,7 +83,7 @@ You can switch between CS2 and FiveM at any time using the game switcher in the 
 | Platform | Link |
 |----------|------|
 | Discord | `twilightmay` — [join the server](https://discord.gg/xYR3FEDyK4) |
-| YouTube | [youtube.com/@twilightmay](https://youtube.com/@twilightmay) |
+| YouTube | [youtube.com/@twilightmay](https://youtube.com/@twilightmay-nlz) |
 | GitHub | [github.com/twilightmay](https://github.com/twilightmay) |
 | guns.lol | [guns.lol/twilightmay](https://guns.lol/twilightmay) |
 
