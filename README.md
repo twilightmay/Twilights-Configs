@@ -1,19 +1,21 @@
+
 #Use :https://twilightmay.github.io/Twilights-Configs
 
 # Twilight's Configs
 
-A config showcase site for **CS2** and **FiveM** — built around skins for [lunaR](https://frostchanger.com) and cheat configs for [Lucid](https://frostchanger.com).
+A config showcase site for **CS2**, **FiveM**, and **Roblox** — built around skins for [lunaR](https://frostchanger.com), cheat configs for [Lucid](https://frostchanger.com), and script configs for **Celestial**.
 
 ---
 
 ## What is this?
 
-This is a personal config page by **twilightmay**. It hosts ready-to-use config files for two games:
+This is a personal config page by **twilightmay**. It hosts ready-to-use config files for three games:
 
 - **CS2** — Monthly skin changer packs for the lunaR skin changer
 - **FiveM** — Cheat configs for the Lucid cheat, covering Legit, Semi Rage, and Rage playstyles
+- **Roblox** — Script configs for Celestial, covering Legit and HVH playstyles
 
-You pick your game on the landing screen, then browse the available configs/packs.
+You pick your game using the game switcher in the top bar, then browse the available configs/packs.
 
 ---
 
@@ -65,6 +67,28 @@ Three config profiles for the **Lucid** cheat, each targeting a different playst
 
 ---
 
+## Roblox — Script Configs
+
+Two config profiles for **Celestial**, an external Roblox script:
+
+### Legit Config — `Aim + ESP[Blue-Purple Gradient].json`
+- **Risk level:** Low
+- **Features:** Aimbot, ESP, Player settings
+- Smooth, human-like aim with ESP and player settings tuned for legit play. Looks natural — no obvious snapping, no flags.
+
+### HVH Config — `HVH V1 [Orange-Red].json`
+- **Risk level:** High
+- **Features:** Aimbot, Triggerbot, ESP, Player settings
+- **Dev's Pick** — full send for hit-vs-hit lobbies. This is the config the dev personally uses, and it's what got them to **#55 on the Global Leaderboard**.
+
+### How to use a Roblox config
+
+1. Get **Celestial** (external script, not affiliated with frostchanger.com)
+2. Click **Download Config** on the config you want
+3. Load the `.json` file in Celestial — done
+
+---
+
 ## Navigating the site
 
 The site has four tabs for each game:
@@ -76,7 +100,7 @@ The site has four tabs for each game:
 | **Social** | Links to find twilightmay online |
 | **Support** | Referral code, YouTube, and Discord |
 
-You can switch between CS2 and FiveM at any time using the game switcher in the top bar.
+You can switch between CS2, FiveM, and Roblox at any time using the game switcher in the top bar.
 
 ---
 
