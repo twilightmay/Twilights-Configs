@@ -1046,7 +1046,7 @@
       </div>
       <div class="burger-profile-info">
         <div class="burger-profile-name">twilightmay</div>
-        <div class="burger-profile-tag">CS2 · FiveM configs</div>
+        <div class="burger-profile-tag">CS2 · FiveM · Roblox configs</div>
       </div>
       <button class="burger-close" onclick="closeBurgerMenu()">&#x2715;</button>
     </div>
@@ -1128,8 +1128,9 @@ var sliderState = {};
 // Replace null with a YouTube video ID e.g. 'dQw4w9WgXcQ'
 // ============================================================
 var showcaseVideos = {
-  cs2:   '9tEcn7WhFgI',
-  fivem: '9TUIeHBEKZw'
+  cs2:    '9tEcn7WhFgI',
+  fivem:  '9TUIeHBEKZw',
+  roblox: null
 };
 
 // ============================================================
@@ -1228,20 +1229,54 @@ var fivemPacks = [
   }
 ];
 
-function getPacks() { return currentGame === 'fivem' ? fivemPacks : cs2Packs; }
+var robloxPacks = [
+  {
+    name: "Legit", subtitle: "Undetected Play", month: "Latest",
+    tags: ["Aimbot","ESP","Player"], ftype: "legit",
+    images: ['data/roblox/legit/esp.png'],
+    videoId: null,
+    downloadUrl: 'https://files.catbox.moe/yzigcv.json',
+    filename: 'Aim + ESP[Blue-Purple Gradient].json'
+  },
+  {
+    name: "HVH", subtitle: "Dev Favorite \u2014 Hit #55 Global Leaderboard", month: "Latest",
+    tags: ["Aimbot","Triggerbot","ESP","Player","Dev's Pick"], ftype: "rage",
+    images: ['data/roblox/hvh/celestial.png'],
+    videoId: null,
+    downloadUrl: 'https://files.catbox.moe/eqd1m5.json',
+    filename: 'HVH V1 [Orange-Red].json'
+  }
+];
+
+function getPacks() {
+  if (currentGame === 'fivem')  return fivemPacks;
+  if (currentGame === 'roblox') return robloxPacks;
+  return cs2Packs;
+}
 
 // ============================================================
 // LOGOS & SVGs
 // ============================================================
 var CS2_IMG    = 'https://static.wikia.nocookie.net/logopedia/images/4/49/Counter-Strike_2_%28Icon%29.png/revision/latest?cb=20230330015359';
 var FIVEM_IMG  = 'https://img.icons8.com/color/512/fivem.png';
+var ROBLOX_IMG = 'https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png';
 var GUNS_IMG   = 'https://assets.guns.lol/guns_logo_no_background_cropped.png';
 var CS2_LOGO   = '<img src="' + CS2_IMG   + '" style="width:100%;height:100%;object-fit:contain;" alt="CS2">';
 var FIVEM_LOGO = '<img src="' + FIVEM_IMG + '" style="width:100%;height:100%;object-fit:contain;" alt="FiveM">';
+var ROBLOX_LOGO = '<img src="' + ROBLOX_IMG + '" style="width:100%;height:100%;object-fit:contain;" alt="Roblox">';
 var GUNS_LOGO  = '<img src="' + GUNS_IMG  + '" style="width:100%;height:100%;object-fit:contain;" alt="guns.lol">';
 var CS2_ICON   = '<img src="' + CS2_IMG   + '" style="width:100%;height:100%;object-fit:contain;" alt="CS2">';
 var FIVEM_ICON = '<img src="' + FIVEM_IMG + '" style="width:100%;height:100%;object-fit:contain;" alt="FiveM">';
+var ROBLOX_ICON = '<img src="' + ROBLOX_IMG + '" style="width:100%;height:100%;object-fit:contain;" alt="Roblox">';
 var GUNS_ICON  = '<img src="' + GUNS_IMG  + '" style="width:100%;height:100%;object-fit:contain;" alt="guns.lol">';
+
+// ============================================================
+// ROBLOX CHEAT INFO — EDIT ME
+// Celestial is an external script (not a frostchanger.com product)
+// Replace ROBLOX_TOOL_URL with Celestial's actual site/download link
+// ============================================================
+var ROBLOX_TOOL_NAME = 'Celestial';
+var ROBLOX_TOOL_URL  = 'https://example.com';
 
 var DISCORD_SVG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>';
 var GITHUB_SVG  = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>';
@@ -1298,14 +1333,16 @@ document.addEventListener('click', function(e) {
 // TOPBAR
 // ============================================================
 function renderTopbar() {
-  var isF = currentGame === 'fivem';
-  var icons  = { cs2: CS2_ICON, fivem: FIVEM_ICON };
-  var labels = { cs2: 'CS2',    fivem: 'FiveM' };
-  var creditTxt = isF
-    ? 'Cheat <button class="topbar-credit-btn" onclick="openShowcaseModal(\'fivem\')">Lucid</button><span class="hide-sm"> \u2014 frostchanger.com</span>'
-    : 'Skinchanger <button class="topbar-credit-btn" onclick="openShowcaseModal(\'cs2\')">lunaR</button><span class="hide-sm"> \u2014 frostchanger.com</span>';
+  var icons  = { cs2: CS2_ICON, fivem: FIVEM_ICON, roblox: ROBLOX_ICON };
+  var labels = { cs2: 'CS2',    fivem: 'FiveM',     roblox: 'Roblox' };
+  var creditMap = {
+    cs2:    'Skinchanger <button class="topbar-credit-btn" onclick="openShowcaseModal(\'cs2\')">lunaR</button><span class="hide-sm"> \u2014 frostchanger.com</span>',
+    fivem:  'Cheat <button class="topbar-credit-btn" onclick="openShowcaseModal(\'fivem\')">Lucid</button><span class="hide-sm"> \u2014 frostchanger.com</span>',
+    roblox: 'Script <button class="topbar-credit-btn" onclick="openShowcaseModal(\'roblox\')">' + ROBLOX_TOOL_NAME + '</button><span class="hide-sm"> \u2014 external</span>'
+  };
+  var creditTxt = creditMap[currentGame];
 
-  var ddItems = ['cs2','fivem'].map(function(g) {
+  var ddItems = ['cs2','fivem','roblox'].map(function(g) {
     var active = g === currentGame;
     return '<button class="game-dd-item' + (active?' active':'') + '" onclick="switchGame(\'' + g + '\')">'
       + '<span class="tgpi">' + icons[g] + '</span> ' + labels[g]
@@ -1339,6 +1376,8 @@ function renderTopbar() {
 function getHero() {
   if (currentGame === 'fivem')
     return { eye:'FiveM Cheat Configs', title:"Twilight\u2019s FiveM Configs", sub:'Legit, Semi Rage and Rage configs built for the Lucid cheat \u2014 always updated, always optimised.' };
+  if (currentGame === 'roblox')
+    return { eye:'Roblox Script Configs', title:"Twilight\u2019s Roblox Configs", sub:'Legit and HVH configs built for ' + ROBLOX_TOOL_NAME + ' \u2014 always updated, always optimised.' };
   return { eye:'CS2 Skin Changer Configs', title:"Twilight\u2019s Monthly Packs", sub:'Curated skin configurations built for lunaR \u2014 fresh themes, stickers, and charms every month.' };
 }
 
@@ -1483,16 +1522,16 @@ function renderPackCard(pack, idx) {
     + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;margin-left:auto;flex-shrink:0;opacity:.6"><polyline points="9 18 15 12 9 6"/></svg>'
     + '</a>';
 
-  // Download button (FiveM only)
+  // Download button (FiveM & Roblox)
   var downloadBtn = '';
-  if (currentGame === 'fivem' && pack.downloadUrl) {
-    var fname = pack.name.toLowerCase().replace(/\s+/g, '-') + '-config.json';
+  if (currentGame !== 'cs2' && pack.downloadUrl) {
+    var fname = pack.filename || (pack.name.toLowerCase().replace(/\s+/g, '-') + '-config.json');
     downloadBtn = '<button class="pack-download" type="button" onclick="downloadConfig(\'' + pack.downloadUrl + '\',\'' + fname + '\',this)">'
       + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
       + '<span class="dl-label">Download Config</span>'
       + '<span class="dl-filename">' + fname + '</span>'
       + '</button>';
-  } else if (currentGame === 'fivem') {
+  } else if (currentGame !== 'cs2') {
     downloadBtn = '<button class="pack-download" onclick="noDownloadYet(this)" type="button">'
       + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
       + '<span class="dl-label">Download Config</span>'
@@ -1588,6 +1627,17 @@ function renderWhyTab() {
       + wCard(ICON_BOX,  'Built for lunaR',      'Configs are made specifically for the lunaR skin changer at frostchanger.com. Format and compatibility are guaranteed.')
       + '</div>';
     banner = '<div class="' + bCls + '"><div class="banner-text"><h3>Get lunaR to load these packs</h3><p>Twilight\u2019s packs are designed exclusively for lunaR. Get it at frostchanger.com.</p></div><a class="banner-link" href="https://frostchanger.com" target="_blank" rel="noopener"><img src="https://frostchanger.com/apple-touch-icon.png" class="banner-fc-logo" alt="frostchanger"> frostchanger.com</a></div>';
+  } else if (currentGame === 'roblox') {
+    hero = '<div class="why-hero sc"><h2>Two configs, both dialed in.</h2><p>Legit and HVH profiles for ' + ROBLOX_TOOL_NAME + ' on Roblox \u2014 one built to stay under the radar, one built to dominate lobbies.</p></div>';
+    grid = '<div class="why-grid">'
+      + wCard(ICON_SHLD, 'Legit Config',              'Smooth, human-like aim with ESP and player settings tuned for legit play. Looks natural \u2014 no obvious snapping, no flags.', 'type-legit')
+      + wCard(ICON_ZAP,  'HVH Config',                'Full send. Aimbot, triggerbot and ESP tuned for hit-vs-hit lobbies where everyone is rocking a script. This is the dev\u2019s personal favorite \u2014 used to hit #55 on the Global Leaderboard.', 'type-rage')
+      + wCard(ICON_SET,  'Built for ' + ROBLOX_TOOL_NAME, 'Both configs are made specifically for ' + ROBLOX_TOOL_NAME + ', an external Roblox script. Tested and tuned for its config format.')
+      + wCard(ICON_BOLT, 'Always updated',             'Configs are kept up to date as ' + ROBLOX_TOOL_NAME + ' changes. When the script updates, the configs update with it.')
+      + wCard(ICON_CHK,  'Aimbot, ESP & Player',       'Both configs cover aimbot, ESP and player settings \u2014 just load whichever fits how you want to play.')
+      + wCard(ICON_BOX,  'Zero grind',                 'Download the config, load it in ' + ROBLOX_TOOL_NAME + ', and you\u2019re done. No hours spent tweaking sliders.')
+      + '</div>';
+    banner = '<div class="' + bCls + '"><div class="banner-text"><h3>Get ' + ROBLOX_TOOL_NAME + ' to use these configs</h3><p>' + ROBLOX_TOOL_NAME + ' is an external Roblox script \u2014 these configs are built specifically for it.</p></div><a class="banner-link" href="' + ROBLOX_TOOL_URL + '" target="_blank" rel="noopener"><img src="' + ROBLOX_IMG + '" class="banner-fc-logo" alt="' + ROBLOX_TOOL_NAME + '"> ' + ROBLOX_TOOL_NAME + '</a></div>';
   } else {
     hero = '<div class="why-hero sc"><h2>Configs for every playstyle.</h2><p>Three distinct profiles for the Lucid cheat on FiveM \u2014 whether you want to stay under the radar or go full send, there is a config built for it.</p></div>';
     grid = '<div class="why-grid">'
@@ -1973,11 +2023,15 @@ function noDownloadYet(btn) {
 // SHOWCASE MODAL
 // ============================================================
 function openShowcaseModal(game) {
-  var isF = (game || currentGame) === 'fivem';
-  var title  = isF ? 'Lucid' : 'lunaR';
-  var sub    = isF ? 'FiveM cheat by frostchanger.com' : 'CS2 skin changer by frostchanger.com';
-  var icon   = isF ? FIVEM_IMG : CS2_IMG;
-  var vidId  = isF ? showcaseVideos.fivem : showcaseVideos.cs2;
+  game = game || currentGame;
+  var meta = {
+    cs2:    { title: 'lunaR', sub: 'CS2 skin changer by frostchanger.com', icon: CS2_IMG },
+    fivem:  { title: 'Lucid', sub: 'FiveM cheat by frostchanger.com', icon: FIVEM_IMG },
+    roblox: { title: ROBLOX_TOOL_NAME, sub: 'External Roblox script', icon: ROBLOX_IMG }
+  };
+  var m = meta[game] || meta.cs2;
+  var title = m.title, sub = m.sub, icon = m.icon;
+  var vidId = showcaseVideos[game];
   var extSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
   var playSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
 
